@@ -148,21 +148,26 @@
         /* TAREA 1 · Barra de progreso (.barra-progreso)
            Línea de tiempo: scroll(root). Anima transform: scaleX(0) -> scaleX(1). */
            .barra-progreso{
-            animation: crecer-barra linear both;
-            animation-timeline: scroll(root);
-           }
+                animation: crecer-barra linear both;
+                animation-timeline: scroll(root);
+            }
 
 
         /* TAREA 2 · Aparecer (.revelar)
            Línea de tiempo: view(). Prueba animation-range: entry 10% cover 30%.
            Bonus: escalona las tarjetas (.tarjeta:nth-child(3n + 2) y (3n)). */
 
-           .revelar{
-            animation: aparecer linear both;
-            animation-timeline: view();
-            animation-range: entry 10% cover 30%;
+           /* .revelar{
+                animation: aparecer linear both;
+                animation-timeline: view();
+                animation-range: entry 10% cover 30%;
+            } */
 
-           }
+            @keyframes desplazar{
+                to {
+                    transform: translateX( calc (-100% + 100vw));
+                }
+            }
 
 
         /* TAREA 3 · Parallax de la foto (.marco-parallax img)
@@ -181,6 +186,30 @@
 
         /* EXTRA 2 · Escaparate horizontal (.escaparate, .escaparate-fijo, .escaparate-pista)
            Mira el README: sección de 300vh, interior sticky y pista que se desplaza. */
+        .escaparate {
+            height: 300vh;
+            padding-block: 0;
+            view-timeline-name: --escaparate;
+        }
+
+        .escaparate-fijo{
+            position: sticky;
+            top:0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .escaparate-pista{
+            width: max-content;
+            overflow: visible;
+            padding-inline: max(1.25rem, calc((100vw - 72rem) / 2 +1.25rem) );
+            animation: desplazar linear both;
+            animation-timeline: --escaparate;
+            animation-range: contain 0% contain 100%;
+        }
 
     }
 }
